@@ -6,8 +6,8 @@ plugins {
 
 import com.modrinth.minotaur.dependencies.ModDependency
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}+${project.suported_version}"
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.google.code.gson:gson:2.9.0'
+	implementation 'com.google.code.gson:gson:2.8.0'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 	// To change the versions see the gradle.properties file
@@ -87,7 +87,7 @@ tasks.withType(JavaCompile).configureEach {
 
 
 	// Minecraft 1.18 upwards uses Java 17.
-	it.options.release = 17
+	it.options.release = 16
 }
 
 java {

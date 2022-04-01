@@ -53,7 +53,7 @@ public class BackpackPreview extends DrawableHelper {
         return dir;
     }
 
-    public static void loadStorage(HandledScreen screen) {
+    public static void loadStorage(HandledScreen<?> screen) {
         if (!loaded) {
             String title = screen.getTitle().getString();
             if (title.equals("Storage")) {
@@ -101,7 +101,7 @@ public class BackpackPreview extends DrawableHelper {
         }
     }
 
-    public static void updateStorage(HandledScreen screen) {
+    public static void updateStorage(HandledScreen<?> screen) {
         String title = screen.getTitle().getString();
         int index = getStorageIndexFromTitle(title);
         if (index != -1) {

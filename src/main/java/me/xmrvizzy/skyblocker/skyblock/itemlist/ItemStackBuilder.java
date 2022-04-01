@@ -22,7 +22,7 @@ public class ItemStackBuilder {
 
     public static void init() {
         try {
-            petNums = JsonParser.parseString(Files.readString(Paths.get(PETNUMS_PATH))).getAsJsonObject();
+            petNums = new JsonParser().parse(Files.readString(Paths.get(PETNUMS_PATH))).getAsJsonObject();
         } catch (IOException e) {
             e.printStackTrace();
         }

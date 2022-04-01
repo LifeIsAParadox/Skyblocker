@@ -61,7 +61,7 @@ public class ItemRegistry {
             String path = ITEM_LIST_DIR + "/" + file.getName();
             try {
                 String fileContent = Files.readString(Paths.get(path));
-                jsonObjs.add(JsonParser.parseString(fileContent).getAsJsonObject());
+                jsonObjs.add(new JsonParser().parse(fileContent).getAsJsonObject());
             } catch (IOException e) {
                 System.err.println("Couldn't import " + path);
                 e.printStackTrace();

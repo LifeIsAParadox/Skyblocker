@@ -37,7 +37,7 @@ public class SkyblockerConfig implements ConfigData {
         public String apiKey;
 
         @ConfigEntry.Category("bars")
-        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
+        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON) 
         public Bars bars = Bars.DISABLE;
       
         @ConfigEntry.Category("itemList")

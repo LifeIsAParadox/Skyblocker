@@ -3,7 +3,7 @@ name: Build Beta
 on:
   push:
     branches:
-      - master
+      - aditional-bar
   pull_request:
 
 

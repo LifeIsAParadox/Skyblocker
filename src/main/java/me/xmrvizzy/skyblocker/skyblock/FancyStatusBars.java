@@ -31,24 +31,50 @@ public class FancyStatusBars extends DrawableHelper {
 
     public boolean render(MatrixStack matrices, int scaledWidth, int scaledHeight) {
         var player = client.player;
-        if (!SkyblockerConfig.get().general.bars.enableBars || player == null)
+        SkyblockerConfig.Bars barconf = SkyblockerConfig.get().general.bars;
+        if (barconf == SkyblockerConfig.Bars.DISABLE || player == null)
             return false;
-        left = scaledWidth / 2 - 91;
-        top = scaledHeight - 35;
+        if (barconf == SkyblockerConfig.Bars.OLD_BAR) {
+            left = scaledWidth / 2 - 91;
+            top = scaledHeight - 35;
 
-        bars[0].update(statusBarTracker.getHealth());
-        bars[1].update(statusBarTracker.getMana());
-        int def = statusBarTracker.getDefense();
-        bars[2].fill[0] = fill(def, def + 100);
-        bars[2].text = def;
-        bars[3].fill[0] = (int) (32 * player.experienceProgress);
-        bars[3].text = player.experienceLevel;
+            bars[0].update(statusBarTracker.getHealth());
+            bars[1].update(statusBarTracker.getMana());
+            int def = statusBarTracker.getDefense();
+            bars[2].fill[0] = fill(def, def + 100);
+            bars[2].text = def;
+            bars[3].fill[0] = (int) (32 * player.experienceProgress);
+            bars[3].text = player.experienceLevel;
 
-        RenderSystem.setShaderTexture(0, BARS);
-        for (var bar : bars)
-            bar.draw(matrices);
-        for (var bar : bars)
-            bar.drawText(matrices);
+            RenderSystem.setShaderTexture(0, BARS);
+            for (var bar : bars)
+                bar.draw(matrices);
+            for (var bar : bars)
+                bar.drawText(matrices);
+        }
+
+        if (barconf == SkyblockerConfig.Bars.NEW_BAR) {
+            left = scaledWidth / 2 - 91;
+            top = scaledHeight - 35;
+
+            RenderSystem.setShaderTexture(0, BARS);
+
+            drawTexture(matrices, left, top, 75, 10, 0, 0,43,9,256,256);
+            drawTexture(matrices, left + 20, top, (54 * statusBarTracker.getHealth().value() - 1) / statusBarTracker.getHealth().max(), 10, 43, 0, 31,9,256,256);
+            drawTexture(matrices, left + 20, top, (54 * statusBarTracker.getHealth().overflow() - 1) / statusBarTracker.getHealth().max(), 10, 43+30, 0, 31,9,256,256);
+            drawTexture(matrices, left + 85, top, 15, 10, 0, 3*9,10,9,256, 256);
+            drawTexture(matrices, left + 107, top, 75, 10, 0, 9,43,9,256, 256);
+            drawTexture(matrices, left + 107 + 20, top, (54 * statusBarTracker.getMana().value() - 1) / statusBarTracker.getMana().max(), 10, 43, 9,31,9,256,256);
+            drawTexture(matrices, left + 107 + 20, top, (54 * statusBarTracker.getMana().overflow() - 1) / statusBarTracker.getMana().max(), 10, 43 + 30, 9,31,9,256,256);
+
+            TextRenderer textRenderer = client.textRenderer;
+            String text = statusBarTracker.getHealth().value() + "/" + statusBarTracker.getHealth().max();
+            textRenderer.draw(matrices, text,  left + ((float) (50 - text.length())/2), top - 8, 16733525);
+            text = statusBarTracker.getMana().value() + "/" + statusBarTracker.getMana().max();
+            textRenderer.draw(matrices, text,  left + 110 + ((float) (50 - text.length())/2), top - 8, 5636095);
+            text = "" + player.experienceLevel;
+            textRenderer.draw(matrices, text,  left + 60 + ((float) (50 - text.length())/2), top - 8, 8453920);
+        }
         return true;
     }
 

@@ -49,7 +49,8 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
     @Inject(method = "setOverlayMessage(Lnet/minecraft/text/Text;Z)V", at = @At("HEAD"), cancellable = true)
     private void onSetOverlayMessage(Text message, boolean tinted, CallbackInfo ci) {
-        if (!Utils.isOnSkyblock || !SkyblockerConfig.get().general.bars.enableBars)
+        SkyblockerConfig.Bars barconf = SkyblockerConfig.get().general.bars;
+        if (!Utils.isOnSkyblock || barconf == SkyblockerConfig.Bars.DISABLE)
             return;
         String msg = message.getString();
         String res = statusBarTracker.update(msg, SkyblockerConfig.get().messages.hideMana);
@@ -81,7 +82,8 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
     @Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
     private void renderExperienceBar(MatrixStack matrices, int x, CallbackInfo ci) {
-        if (Utils.isOnSkyblock && SkyblockerConfig.get().general.bars.enableBars)
+        SkyblockerConfig.Bars barconf = SkyblockerConfig.get().general.bars;
+        if (Utils.isOnSkyblock && barconf != SkyblockerConfig.Bars.DISABLE)
             ci.cancel();
     }
 
@@ -91,7 +93,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
             return;
         if(statusBars.render(matrices, scaledWidth, scaledHeight))
             ci.cancel();
-
         if (Utils.isInDungeons && SkyblockerConfig.get().locations.dungeons.enableMap)
             DungeonMap.render(matrices);
 
@@ -100,7 +101,8 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
     @Inject(method = "renderMountHealth", at = @At("HEAD"), cancellable = true)
     private void renderMountHealth(MatrixStack matrices, CallbackInfo ci) {
-        if (Utils.isOnSkyblock && SkyblockerConfig.get().general.bars.enableBars)
+        SkyblockerConfig.Bars barconf = SkyblockerConfig.get().general.bars;
+        if (Utils.isOnSkyblock && barconf != SkyblockerConfig.Bars.DISABLE)
             ci.cancel();
     }
 }

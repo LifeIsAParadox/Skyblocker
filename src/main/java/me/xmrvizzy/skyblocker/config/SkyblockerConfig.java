@@ -37,8 +37,8 @@ public class SkyblockerConfig implements ConfigData {
         public String apiKey;
 
         @ConfigEntry.Category("bars")
-        @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
-        public Bars bars = new Bars();
+        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
+        public Bars bars = Bars.DISABLE;
       
         @ConfigEntry.Category("itemList")
         @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
@@ -55,9 +55,10 @@ public class SkyblockerConfig implements ConfigData {
         @ConfigEntry.Gui.Excluded
         public List<Integer> lockedSlots = new ArrayList<>();
     }
-
-    public static class Bars {
-        public boolean enableBars = true;
+    public enum Bars {
+        DISABLE,
+        OLD_BAR,
+        NEW_BAR;
     }
     public static class RichPresence {
         public boolean enableRichPresence = false;

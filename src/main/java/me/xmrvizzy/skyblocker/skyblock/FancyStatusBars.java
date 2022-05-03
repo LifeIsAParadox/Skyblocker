@@ -59,21 +59,34 @@ public class FancyStatusBars extends DrawableHelper {
 
             RenderSystem.setShaderTexture(0, BARS);
 
-            drawTexture(matrices, left, top, 75, 10, 0, 0,43,9,256,256);
-            drawTexture(matrices, left + 20, top, (54 * statusBarTracker.getHealth().value() - 1) / statusBarTracker.getHealth().max(), 10, 43, 0, 31,9,256,256);
-            drawTexture(matrices, left + 20, top, (54 * statusBarTracker.getHealth().overflow() - 1) / statusBarTracker.getHealth().max(), 10, 43+30, 0, 31,9,256,256);
-            drawTexture(matrices, left + 85, top, 15, 10, 0, 3*9,10,9,256, 256);
-            drawTexture(matrices, left + 107, top, 75, 10, 0, 9,43,9,256, 256);
-            drawTexture(matrices, left + 107 + 20, top, (54 * statusBarTracker.getMana().value() - 1) / statusBarTracker.getMana().max(), 10, 43, 9,31,9,256,256);
-            drawTexture(matrices, left + 107 + 20, top, (54 * statusBarTracker.getMana().overflow() - 1) / statusBarTracker.getMana().max(), 10, 43 + 30, 9,31,9,256,256);
+            drawTexture(matrices, left, top, 75, 9, 0, 0,43,9,256,256);
+            drawTexture(matrices, left + 18, top, (57 * statusBarTracker.getHealth().value() - 1) / statusBarTracker.getHealth().max(), 9, 43, 0, 31,9,256,256);
+            drawTexture(matrices, left + 18, top, (57 * statusBarTracker.getHealth().overflow() - 1) / statusBarTracker.getHealth().max(), 9, 43+30, 0, 31,9,256,256);
+            drawTexture(matrices, left + 85, top, 15, 9, 0, 3*9,10,9,256, 256);
+            drawTexture(matrices, left + 107, top, 75, 9, 0, 9,43,9,256, 256);
+            drawTexture(matrices, left + 105 + 20, top, (57 * statusBarTracker.getMana().value() - 1) / statusBarTracker.getMana().max(), 9, 43, 9,31,9,256,256);
+            drawTexture(matrices, left + 105 + 20, top, (57 * statusBarTracker.getMana().overflow() - 1) / statusBarTracker.getMana().max(), 9, 43 + 30, 9,31,9,256,256);
 
             TextRenderer textRenderer = client.textRenderer;
             String text = statusBarTracker.getHealth().value() + "/" + statusBarTracker.getHealth().max();
-            textRenderer.draw(matrices, text,  left + ((float) (50 - text.length())/2), top - 8, 16733525);
+
+            textRenderer.draw(matrices, text,  left + ((float) (55 - text.length())/2)-1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + ((float) (55 - text.length())/2)+1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + ((float) (55 - text.length())/2), top - 6-1, 0);
+            textRenderer.draw(matrices, text,  left + ((float) (55 - text.length())/2), top - 6+1, 0);
+            textRenderer.draw(matrices, text,  left + ((float) (55 - text.length())/2), top - 6, 16733525);
             text = statusBarTracker.getMana().value() + "/" + statusBarTracker.getMana().max();
-            textRenderer.draw(matrices, text,  left + 110 + ((float) (50 - text.length())/2), top - 8, 5636095);
+            textRenderer.draw(matrices, text,  left + 105 + ((float) (60 - text.length())/2)-1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + 105 + ((float) (60 - text.length())/2)+1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + 105 + ((float) (60 - text.length())/2), top - 6-1, 0);
+            textRenderer.draw(matrices, text,  left + 105 + ((float) (60 - text.length())/2), top - 6+1, 0);
+            textRenderer.draw(matrices, text,  left + 105 + ((float) (60 - text.length())/2), top - 6, 5636095);
             text = "" + player.experienceLevel;
-            textRenderer.draw(matrices, text,  left + 60 + ((float) (50 - text.length())/2), top - 8, 8453920);
+            textRenderer.draw(matrices, text,  left + 57 + ((float) (60 - text.length())/2)-1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + 57 + ((float) (60 - text.length())/2)+1, top - 6, 0);
+            textRenderer.draw(matrices, text,  left + 57 + ((float) (60 - text.length())/2), top - 6-1, 0);
+            textRenderer.draw(matrices, text,  left + 57 + ((float) (60 - text.length())/2), top - 6+1, 0);
+            textRenderer.draw(matrices, text,  left + 57 + ((float) (60 - text.length())/2), top - 6, 8453920);
         }
         return true;
     }
